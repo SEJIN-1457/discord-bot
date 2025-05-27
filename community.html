@@ -38,8 +38,13 @@
       position: static;
     }
 
-    .back-button { margin-right: auto; }
-    .admin-icon { margin-left: auto; }
+    .back-button {
+      margin-right: auto;
+    }
+
+    .admin-icon {
+      margin-left: auto;
+    }
 
     .content {
       max-width: 960px;
@@ -158,16 +163,6 @@
       box-sizing: border-box;
     }
 
-    .qa-form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .qa-form select {
-      order: -1;
-      margin-bottom: 10px;
-    }
-
     footer {
       background-color: #333;
       color: white;
@@ -237,12 +232,12 @@
         </li>
       </ul>
       <div class="qa-form">
+        <textarea id="qa-input" placeholder="여기에 질문을 작성하세요..."></textarea>
         <select id="category">
           <option value="일반">일반 문의</option>
           <option value="기능">기능 문의</option>
           <option value="버그">버그 신고</option>
         </select>
-        <textarea id="qa-input" placeholder="여기에 질문을 작성하세요..."></textarea>
         <button onclick="submitQA()">질문 제출</button>
       </div>
     </div>
