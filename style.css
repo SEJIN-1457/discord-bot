@@ -12,7 +12,7 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   color: white;
   overflow-x: hidden;
-  background-image: url('discord-main.png');
+  background-image: url('images/discord-main.png');
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
