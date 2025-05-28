@@ -247,89 +247,9 @@
     <p>&copy; 2025 Discord Bot. All Rights Reserved.</p>
   </footer>
 
-  <script>
-    let isAdmin = false;
+  <!-- 외부 JavaScript 파일 추가 -->
+  <script src="script.js"></script>
+  <script src="admin.js"></script>
 
-    function verifyAdmin() {
-      const pass = document.getElementById("admin-pass").value;
-      if (pass === "admin1234") {
-        isAdmin = true;
-        document.getElementById("admin-controls").style.display = "block";
-        document.getElementById("admin-modal").style.display = "none";
-        alert("관리자 모드가 활성화되었습니다.");
-      } else {
-        alert("비밀번호가 틀렸습니다.");
-      }
-    }
-
-    function postNotice() {
-      const title = document.getElementById("notice-title").value.trim();
-      const body = document.getElementById("notice-body").value.trim();
-      if (!title || !body) return alert("제목과 내용을 모두 입력해주세요.");
-      const list = document.getElementById("notice-list");
-      const date = new Date().toISOString().split('T')[0];
-      const li = document.createElement("li");
-      li.innerHTML = `<h3>${title} <small>${date}</small></h3><p>${body}</p>`;
-      list.insertBefore(li, list.firstChild);
-      document.getElementById("notice-title").value = '';
-      document.getElementById("notice-body").value = '';
-    }
-
-    function submitQA() {
-      const input = document.getElementById("qa-input");
-      const category = document.getElementById("category").value;
-      const text = input.value.trim();
-      if (!text) return alert("질문을 입력해주세요!");
-      const list = document.getElementById("qa-list");
-      const date = new Date().toISOString().split('T')[0];
-      const li = document.createElement("li");
-      li.className = "waiting";
-      li.innerHTML = `<h3>${category} 질문 <small>${date}</small></h3><p>${text}</p><span class='waiting-status'>[답변 대기중]</span>`;
-      if (isAdmin) {
-        const answerBox = document.createElement("div");
-        answerBox.className = "admin-answer";
-        answerBox.innerHTML = `
-          <textarea placeholder="답변 작성"></textarea>
-          <button onclick="submitAnswer(this)">답변 등록</button>
-        `;
-        li.appendChild(answerBox);
-      }
-      list.appendChild(li);
-      input.value = '';
-    }
-
-    function submitAnswer(button) {
-      const li = button.closest('li');
-      const textarea = li.querySelector('textarea');
-      const answer = textarea.value.trim();
-      if (!answer) return alert("답변 내용을 입력하세요.");
-      textarea.remove();
-      button.remove();
-      const status = li.querySelector('.waiting-status');
-      if (status) status.remove();
-      li.dataset.answer = answer;
-      li.classList.add("answered");
-      li.innerHTML += `<span class="answer-status">[답변완료]</span>`;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("qa-list").addEventListener("click", (e) => {
-        const li = e.target.closest("li");
-        if (!li) return;
-        if (li.classList.contains("answered")) {
-          const answerText = li.dataset.answer || "답변이 등록되어 있지 않습니다.";
-          const existing = li.querySelector(".answer-text-block");
-          if (existing) {
-            existing.remove();
-          } else {
-            const block = document.createElement("p");
-            block.className = "answer-text-block";
-            block.textContent = answerText;
-            li.appendChild(block);
-          }
-        }
-      });
-    });
-  </script>
 </body>
 </html>
